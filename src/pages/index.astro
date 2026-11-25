@@ -1,0 +1,507 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import HeroCollage from '../components/HeroCollage.astro';
+import AccuracyCard from '../components/AccuracyCard.astro';
+import FaqSection from '../components/FaqSection.astro';
+import FeaturedTools from '../components/FeaturedTools.astro';
+import CouponBand from '../components/CouponBand.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { SITE, PLAN_TOOLS, PLANS, COUPON } from '../lib/site';
+import { AD_SLOTS } from '../lib/ads';
+import searchTermGroups from '../data/search-term-groups.json';
+import SearchTagsGrid from '../components/SearchTagsGrid.astro';
+import { SITE_FAQ, faqJsonLd } from '../lib/faq';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+      description: SITE.defaultDescription,
+    },
+    {
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.url,
+      email: SITE.email,
+      telephone: SITE.phone,
+    },
+    faqJsonLd(SITE_FAQ),
+  ],
+};
+
+const features = [
+  {
+    title: 'Ahrefs Keyword Research',
+    tool: 'Keyword Explorer',
+    body: 'Ahrefs’ keyword research tool provides invaluable insights, helping you discover high-traffic keywords, analyze competition, and refine your SEO strategy for maximum impact — included in every Ahrefs group buy plan.',
+    points: [
+      'Comprehensive Keyword Database',
+      'Competitive Analysis',
+      'Keyword Suggestions',
+      'SERP Overview',
+      'Traffic Potential',
+    ],
+    percent: '98%',
+    note: 'Keyword Research — 98% accurate results',
+    image: '/images/header-keyword-explorer.webp',
+    alt: 'Ahrefs Keyword Explorer on BuyAhref — keyword difficulty, volume, and matching terms for SEO research',
+  },
+  {
+    title: 'Ahrefs Site Audit',
+    tool: 'Site Audit',
+    body: 'Ahrefs’ site audit tool offers a thorough analysis of your website’s health, identifying critical issues and optimization opportunities to enhance your SEO performance on an affordable group-buy plan.',
+    points: [
+      'Comprehensive Health Check',
+      'On-Page SEO Insights',
+      'Site Performance Metrics',
+      'Detailed Reports',
+      'Historical Data Tracking',
+    ],
+    percent: '97%',
+    note: 'Site Audit — 97% accurate results',
+    image: '/images/header-site-audit.webp',
+    alt: 'Ahrefs Site Audit on BuyAhref — website health score, crawl issues, and SEO performance charts',
+  },
+  {
+    title: 'Ahrefs Backlink Analysis',
+    tool: 'Backlink Analysis',
+    body: 'Ahrefs’ backlink analysis tool delivers in-depth insights into your link profile, helping you evaluate link quality, uncover growth opportunities, and strengthen your site’s authority.',
+    points: [
+      'Detailed Backlink Profile',
+      'Referring Domain Insights',
+      'Link Growth Trends',
+      'Toxic Link Detection',
+      'Competitive Backlink Analysis',
+    ],
+    percent: '98%',
+    note: 'Backlink Analysis — 98% accurate results',
+    image: '/images/header-backlink-analysis.webp',
+    alt: 'Ahrefs Backlink Analysis on BuyAhref — referring domains, Domain Rating, and backlink metrics',
+  },
+  {
+    title: 'Ahrefs Content Marketing',
+    tool: 'Content Explorer',
+    body: 'Ahrefs’ content marketing tools empower you to create compelling content by analyzing successful topics, optimizing for SEO, and tracking performance to drive more traffic and engagement.',
+    points: [
+      'Content Explorer',
+      'Top Pages Analysis',
+      'Content Gap Analysis',
+      'SEO Optimization',
+      'Performance Tracking',
+    ],
+    percent: '99%',
+    note: 'Content Marketing — 99% accurate results',
+    image: '/images/feature-ahrefs-com.webp',
+    alt: 'Ahrefs content and SEO tools available through BuyAhref group buy membership',
+  },
+];
+
+const reasons = [
+  {
+    title: 'Cost-Effective',
+    text: 'Get access to the Ahrefs Unlimited Plan at a fraction of the standard cost.',
+  },
+  {
+    title: 'Comprehensive Features',
+    text: 'Enjoy the same extensive features and data that Ahrefs offers for effective SEO and marketing strategies.',
+  },
+  {
+    title: 'Accessibility',
+    text: 'The Group Buy Ahrefs model democratizes access to enterprise-level SEO tools for marketers with any budget.',
+  },
+  {
+    title: 'Collaboration',
+    text: 'Share powerful Ahrefs features with a community of like-minded marketers and grow together.',
+  },
+];
+
+const tagGroups = searchTermGroups as Record<string, string[]>;
+const searchTermCount = Object.values(tagGroups).reduce((n, tags) => n + tags.length, 0);
+
+const trusted = [
+  { src: '/images/trusted-meta.svg', alt: 'Meta partner' },
+  { src: '/images/trusted-google-cloud.svg', alt: 'Google Cloud' },
+  { src: '/images/trusted-google-partner.svg', alt: 'Google partner' },
+  { src: '/images/trusted-shopify.svg', alt: 'Shopify' },
+  { src: '/images/trusted-tiktok.svg', alt: 'TikTok' },
+];
+---
+
+<BaseLayout
+  title={SITE.defaultTitle}
+  description={SITE.defaultDescription}
+  canonicalPath="/"
+  jsonLd={jsonLd}
+  preloadImage="/images/header-site-audit.webp"
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-line bg-paper">
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(ellipse_at_top_left,_rgba(91,72,224,0.09),_transparent_55%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="container-narrow relative grid items-center gap-10 px-5 pb-14 pt-10 md:gap-12 md:px-8 md:pb-20 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 lg:px-12 lg:pb-24 lg:pt-16"
+    >
+      <div class="max-w-xl text-center lg:max-w-none lg:text-left">
+        <p class="eyebrow">Ahrefs Group Buy · BuyAhref.com</p>
+        <h1 class="heading-display mt-4 text-[2.35rem] leading-[1.08] sm:text-5xl md:text-[3.25rem] lg:text-[3.5rem]">
+          Best Group Buy Ahrefs Service
+        </h1>
+        <p class="mt-5 text-base leading-relaxed text-slate md:text-lg">
+          Ahrefs is powerful, but expensive. Get <strong class="font-semibold text-ink">unlimited Ahrefs</strong> at
+          an affordable <strong class="font-semibold text-ink">ahrefs group buy</strong> price — buy Ahrefs cheap with
+          Semrush, Envato Elements, and 20+ premium SEO tools in one simple plan.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <a href={SITE.signupPage} class="btn-primary">Ahrefs Sign Up</a>
+          <a href={SITE.signupUrl} class="btn-ghost" rel="noopener noreferrer">Buy Ahrefs Cheap</a>
+        </div>
+
+        <p class="mt-4 text-sm text-slate">
+          Already a member?
+          <a href="/secure/login" class="font-semibold text-brand underline-offset-2 hover:underline">Ahrefs Login</a>
+        </p>
+
+        <ul
+          class="mt-8 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+          aria-label="Popular searches"
+        >
+          {
+            [
+              'ahrefs group buy',
+              'group buy ahrefs',
+              'ahrefs coupon',
+              'ahrefs discount',
+            ].map((term) => (
+              <li class="rounded-full border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-mist">
+                {term}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative mx-auto w-full lg:mx-0">
+        <HeroCollage />
+        <p class="mt-5 text-center text-xs font-medium tracking-wide text-slate lg:text-left">
+          Site Audit · Keyword Explorer · Backlink Analysis
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted By -->
+  <section class="border-b border-line bg-canvas">
+    <div class="container-narrow flex flex-col gap-6 px-5 py-8 md:flex-row md:items-center md:justify-between md:px-8">
+      <p class="eyebrow">Trusted By</p>
+      <div class="flex flex-wrap items-center gap-x-10 gap-y-5 opacity-80">
+        {
+          trusted.map((logo) => (
+            <img src={logo.src} alt={logo.alt} width="120" height="28" class="h-6 w-auto md:h-7" loading="lazy" decoding="async" />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="section-pad border-b border-line bg-paper">
+    <div class="container-narrow">
+      <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:max-w-2xl lg:text-left">
+        <p class="eyebrow">What we do</p>
+        <h2 class="heading-display mt-3 text-3xl md:text-5xl">
+          Maximize Your SEO Potential with Ahrefs
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-slate md:text-lg">
+          In the highly competitive world of online marketing, Ahrefs emerges as a leading solution for
+          businesses looking to enhance their SEO strategies. With <strong class="font-semibold text-ink"
+            >Ahrefs group buy</strong
+          >, you unlock the same keyword, audit, backlink, and content tools — at a fraction of the usual price.
+        </p>
+      </div>
+
+      <!-- Accuracy strip — light, not heavy cards -->
+      <div
+        class="mt-12 grid gap-8 border-y border-line py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+        aria-label="Ahrefs tool accuracy"
+      >
+        {
+          features.map((feature) => (
+            <AccuracyCard percent={feature.percent} label={feature.note} />
+          ))
+        }
+      </div>
+
+      <!-- Feature boxes — alternating image / copy -->
+      <div class="mt-14 space-y-6 md:mt-16 md:space-y-8">
+        {
+          features.map((feature, i) => (
+            <article class="overflow-hidden rounded-[28px] border border-line bg-paper shadow-[0_18px_48px_rgba(15,23,42,0.07)]">
+              <div
+                class:list={[
+                  'grid items-center gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:gap-12 lg:p-10',
+                  i % 2 === 1 && 'lg:[&>div:first-child]:order-2',
+                ]}
+              >
+                <div class="relative mx-auto w-full max-w-[260px] sm:max-w-[280px] lg:mx-0 lg:max-w-[300px]">
+                  <div
+                    class="absolute -inset-4 -z-10 rounded-[26px] bg-canvas"
+                    aria-hidden="true"
+                  />
+                  <img
+                    src={feature.image}
+                    alt={feature.alt}
+                    width="300"
+                    height="400"
+                    class="h-auto w-full rounded-[20px] shadow-[0_18px_44px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.06]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand">{feature.tool}</p>
+                  <h3 class="heading-display mt-2 text-2xl md:text-3xl">{feature.title}</h3>
+                  <p class="mt-4 text-base leading-relaxed text-slate">{feature.body}</p>
+                  <ul class="mt-6 grid gap-2.5">
+                    {feature.points.map((point) => (
+                      <li class="flex gap-3 text-sm text-mist md:text-[15px]">
+                        <span
+                          class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                          aria-hidden="true"
+                        />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+        <a href={SITE.signupPage} class="btn-primary">Ahrefs Sign Up</a>
+        <a href={SITE.signupUrl} class="btn-ghost" rel="noopener noreferrer">Buy Ahrefs Cheap</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="section-pad border-b border-line bg-canvas">
+    <div class="container-narrow">
+      <div class="max-w-3xl">
+        <p class="eyebrow">Our Plans</p>
+        <h2 class="heading-display mt-3 text-3xl md:text-5xl">Ahrefs Group Buy at Affordable Price</h2>
+        <p class="mt-4 text-slate">
+          Choose Monthly, 6 Month, or 1 Year access. Every Master Plan includes Ahrefs plus {PLAN_TOOLS.length}{' '}
+          premium SEO, AI, Amazon, and creative tools. Use coupon <strong class="text-ink">{COUPON.code}</strong> for{' '}
+          {COUPON.discountLabel} on ToolsMandi.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {
+          PLANS.map((plan) => (
+            <article
+              class:list={[
+                'rounded-[24px] border p-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)] md:p-8',
+                plan.highlight
+                  ? 'border-brand bg-brand-soft'
+                  : 'border-line bg-paper',
+              ]}
+            >
+              {plan.highlight && (
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand">Most Popular</p>
+              )}
+              <h3 class="font-display text-2xl font-bold text-ink">{plan.name}</h3>
+              <p class="mt-4 font-display text-4xl font-extrabold text-ink">
+                {plan.price}
+                <span class="text-base font-medium text-slate">{plan.period}</span>
+              </p>
+              <p class="mt-2 text-xs font-semibold uppercase tracking-wide text-brand">
+                {COUPON.code} → {COUPON.discountLabel}
+              </p>
+              <ul class="mt-6 max-h-72 space-y-1.5 overflow-y-auto text-sm text-mist">
+                {PLAN_TOOLS.map((tool) => (
+                  <li class="flex gap-2">
+                    <span class="text-brand" aria-hidden="true">
+                      ✓
+                    </span>
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+              <a href={SITE.signupUrl} class="btn-primary mt-8 w-full" rel="noopener noreferrer">
+                Buy {plan.name}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-10">
+        <CouponBand compact />
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section-pad border-b border-line">
+    <div class="container-narrow grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Why Buy Ahref</p>
+        <h2 class="heading-display mt-3 text-3xl md:text-4xl">What Is Ahrefs Group Buy</h2>
+        <p class="mt-5 text-base leading-relaxed text-slate">
+          Ahrefs is a leading digital marketing toolset known for its robust capabilities in SEO, content
+          marketing, and competitive analysis.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm text-mist md:text-base">
+          <li><strong class="text-ink">Analyze Keywords:</strong> Discover high-traffic keywords and optimize content.</li>
+          <li><strong class="text-ink">Track Backlinks:</strong> Monitor link-building opportunities.</li>
+          <li><strong class="text-ink">Competitor Analysis:</strong> Stay ahead with competitor insights.</li>
+          <li><strong class="text-ink">Site Audits:</strong> Fix SEO issues and improve visibility.</li>
+          <li><strong class="text-ink">Content Exploration:</strong> Find top-performing content ideas.</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="heading-display text-3xl md:text-4xl">Why Choose BUY Ahrefs Group Buy?</h2>
+        <p class="mt-5 text-base leading-relaxed text-slate">
+          Ahrefs is powerful, but expensive. Group buy makes enterprise SEO tools affordable.
+        </p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {
+            reasons.map((reason) => (
+              <div class="rounded-2xl border border-line bg-paper p-5 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
+                <h3 class="font-display text-lg font-bold text-ink">{reason.title}</h3>
+                <p class="mt-2 text-sm text-slate">{reason.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* Mid-page only — well below first paint; lazy via IntersectionObserver */}
+    <div class="container-narrow mt-12">
+      <AdSlot unit={AD_SLOTS.inContent} />
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section class="section-pad border-b border-line bg-canvas">
+    <div class="container-narrow grid gap-8 lg:grid-cols-2">
+      <div class="rounded-[24px] border border-line bg-paper p-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)] md:p-8">
+        <h2 class="heading-display text-2xl md:text-3xl">How to Ahrefs Sign Up?</h2>
+        <ol class="mt-6 space-y-4 text-sm text-mist md:text-base">
+          <li><strong class="text-ink">1.</strong> Open the <a href={SITE.signupPage} class="font-semibold text-brand underline-offset-2 hover:underline">Sign Up page</a>.</li>
+          <li><strong class="text-ink">2.</strong> Choose your membership plan.</li>
+          <li><strong class="text-ink">3.</strong> Continue to ToolsMandi and fill your details.</li>
+          <li><strong class="text-ink">4.</strong> Pay and get instant access.</li>
+        </ol>
+        <a href={SITE.signupPage} class="btn-primary mt-8">Ahrefs Sign Up</a>
+      </div>
+      <div class="rounded-[24px] border border-line bg-paper p-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)] md:p-8">
+        <h2 class="heading-display text-2xl md:text-3xl">How to Access Group Buy Ahrefs</h2>
+        <ol class="mt-6 space-y-4 text-sm text-mist md:text-base">
+          <li><strong class="text-ink">1.</strong> Open <a href="/secure/login" class="font-semibold text-brand underline-offset-2 hover:underline">Ahrefs Login</a>.</li>
+          <li><strong class="text-ink">2.</strong> Continue to ToolsMandi and sign in.</li>
+          <li><strong class="text-ink">3.</strong> Select Ahrefs from your dashboard.</li>
+          <li><strong class="text-ink">4.</strong> Start using Ahrefs instantly.</li>
+        </ol>
+        <a href="/secure/login" class="btn-ghost mt-8">Ahrefs Sign In</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND -->
+  <section class="section-pad border-b border-line bg-canvas">
+    <div class="container-narrow">
+      <p class="eyebrow">Popular searches</p>
+      <h2 class="heading-display mt-3 text-3xl md:text-4xl">How to Find BuyAhref?</h2>
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate">
+        Search Google for <strong class="text-ink">how to find buy ahref</strong>,
+        <strong class="text-ink">ahrefs group buy</strong>,
+        <strong class="text-ink">group buy ahrefs</strong>, or
+        <strong class="text-ink">buy ahrefs cheap</strong>. We serve users from the United States, India,
+        Brazil, Japan, Germany, Poland, Netherlands, and more — {searchTermCount} related keywords grouped below.
+      </p>
+      <SearchTagsGrid groups={tagGroups} />
+    </div>
+  </section>
+
+  <!-- WHY PLATFORM (from SgBuy homepage — BuyAhref branded) -->
+  <section class="section-pad border-b border-line bg-paper">
+    <div class="container-narrow">
+      <div class="max-w-3xl">
+        <p class="eyebrow">Why BuyAhref</p>
+        <h2 class="heading-display mt-3 text-3xl md:text-5xl">Why choose our group buy platform?</h2>
+        <p class="mt-5 text-base leading-relaxed text-slate md:text-lg">
+          BuyAhref makes premium SEO and marketing software affordable. One membership unlocks Ahrefs plus 50+
+          tools on ToolsMandi — built for freelancers, agencies, and in-house teams who need enterprise features
+          without enterprise invoices.
+        </p>
+      </div>
+
+      <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            {
+              title: '24/7 support',
+              text: 'Get help with signup, login, and tool access whenever you need it — phone and email support from the BuyAhref team.',
+            },
+            {
+              title: 'Account protection',
+              text: 'Shared access is managed through ToolsMandi with clear usage rules so your membership stays stable and secure.',
+            },
+            {
+              title: 'High uptime focus',
+              text: 'We monitor primary tools and aim for reliable dashboard access so your SEO workflow is not interrupted.',
+            },
+            {
+              title: 'Fair refund policy',
+              text: 'If a primary tool fails for three or more consecutive days, BuyAhref may issue a refund under our published policy.',
+            },
+            {
+              title: 'One-click dashboard',
+              text: 'After signup, open Ahrefs, Semrush, Envato, and more from a single ToolsMandi member dashboard.',
+            },
+            {
+              title: 'Fast performance',
+              text: 'Lightweight pages and optimized tool guides so you can research, compare, and buy without waiting on a heavy site.',
+            },
+          ].map((item) => (
+            <li class="rounded-[22px] border border-line bg-canvas p-6 shadow-[0_10px_28px_rgba(15,23,42,0.05)]">
+              <h3 class="font-display text-lg font-bold text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate md:text-[15px]">{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <FaqSection
+    heading="Frequently asked questions"
+    intro="Answers about BuyAhref group buy SEO tools, refunds, access, and account rules."
+  />
+
+  <FeaturedTools
+    title="Popular group buy tool guides"
+    intro="Read BuyAhref guides for Ahrefs, Semrush, Moz Pro, Envato, Canva, and more — then sign up once for shared access on ToolsMandi."
+  />
+
+  <CtaBand
+    heading="Ready for premium group buy SEO tools at BuyAhref prices?"
+    text="Join BuyAhref for Ahrefs, Semrush, and 50+ marketing tools in one membership — signup continues on ToolsMandi."
+  />
+</BaseLayout>

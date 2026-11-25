@@ -1,0 +1,63 @@
+---
+import { SITE, FOOTER_LINKS } from '../lib/site';
+import Logo from './Logo.astro';
+---
+
+<footer class="mt-auto border-t border-line bg-canvas">
+  <div class="container-narrow section-pad !py-14">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <Logo textClass="font-display text-2xl font-bold tracking-tight text-ink" iconClass="h-10 w-10" />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate">
+          Affordable Ahrefs group buy access for SEO professionals, freelancers, and agencies who need
+          enterprise tools without enterprise pricing.
+        </p>
+      </div>
+
+      <div>
+        <p class="eyebrow mb-4">Explore</p>
+        <ul class="space-y-2">
+          {
+            FOOTER_LINKS.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-mist hover:text-brand">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <p class="eyebrow mb-4">Get started</p>
+        <ul class="space-y-2 text-sm text-mist">
+          <li>
+            <a href={SITE.signupPage} class="hover:text-brand">Sign Up</a>
+          </li>
+          <li>
+            <a href={SITE.signupUrl} class="hover:text-brand" rel="noopener noreferrer">Buy on ToolsMandi</a>
+          </li>
+          <li>
+            <a href="/secure/login" class="hover:text-brand">Login</a>
+          </li>
+          <li>
+            <a href={SITE.phoneHref} class="hover:text-brand">{SITE.phone}</a>
+          </li>
+          <li>
+            <a href={`mailto:${SITE.email}`} class="hover:text-brand">{SITE.email}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-slate md:flex-row md:items-center md:justify-between">
+      <p>&copy; {new Date().getFullYear()} BuyAhref. All rights reserved.</p>
+      <p class="flex flex-wrap gap-x-3 gap-y-1">
+        <span>Independent group-buy service — not affiliated with Ahrefs Official.</span>
+        <a href="/sitemap-index.xml" class="hover:text-brand">Sitemap</a>
+        <a href="/robots.txt" class="hover:text-brand">Robots</a>
+      </p>
+    </div>
+  </div>
+</footer>

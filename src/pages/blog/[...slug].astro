@@ -1,0 +1,19 @@
+---
+/**
+ * Catch-all for old /blog/* URLs.
+ * Static hosts can't prerender infinite paths — this covers known shallow slugs.
+ * Cloudflare `_redirects` `/blog/* → /tools` handles everything else in production.
+ */
+export function getStaticPaths() {
+  return [
+    { params: { slug: undefined } },
+    { params: { slug: 'index' } },
+    { params: { slug: 'ahrefs' } },
+    { params: { slug: 'semrush' } },
+    { params: { slug: 'seo' } },
+    { params: { slug: 'group-buy' } },
+  ];
+}
+
+return Astro.redirect('/tools', 301);
+---

@@ -1,0 +1,43 @@
+# === Legacy product / pricing URLs (preserve backlinks) ===
+/product/ahrefs-group-buy-unlimited-plan /ahrefs-group-buy 301
+/product/ahrefs-group-buy-unlimited-plan/ /ahrefs-group-buy 301
+/ahrefs-pricing /ahrefs-group-buy 301
+/ahrefs-pricing/ /ahrefs-group-buy 301
+/envato-elements-pricing /envato-elements-group-buy 301
+/envato-elements-pricing/ /envato-elements-group-buy 301
+/semrush-pricing /semrush-group-buy 301
+/semrush-pricing/ /semrush-group-buy 301
+
+# Old blog → tools directory (no blog on new site)
+/blog /tools 301
+/blog/ /tools 301
+/blog/* /tools 301
+
+# Member / affiliate legacy paths
+/secure/member /secure/login 301
+/secure/member/ /secure/login 301
+/secure/aff/go/* /secure/signup 301
+/secure/aff/* /secure/signup 301
+
+# Common aliases
+/signup /secure/signup 301
+/signup/ /secure/signup 301
+/login /secure/login 301
+/login/ /secure/login 301
+
+# Trailing-slash → clean URLs (matches astro trailingSlash: 'never')
+/contact/   /contact   301
+/about/     /about     301
+/refund/    /refund    301
+/privacy/   /privacy   301
+/terms/     /terms     301
+/tools/     /tools     301
+/secure/login/  /secure/login  301
+/secure/signup/ /secure/signup  301
+
+# One-level tool / content pages: /slug/ → /slug
+/:slug/ /:slug 301
+
+# Legacy sitemap paths
+/sitemap.xml /sitemap-index.xml 301
+/sitemap_index.xml /sitemap-index.xml 301

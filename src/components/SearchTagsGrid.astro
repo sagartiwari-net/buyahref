@@ -1,0 +1,30 @@
+---
+interface Props {
+  groups: Record<string, string[]>;
+}
+
+const { groups } = Astro.props;
+const entries = Object.entries(groups);
+const total = entries.reduce((n, [, tags]) => n + tags.length, 0);
+---
+
+<div class="mt-10" aria-label={`${total} popular BuyAhref search keywords`}>
+  <div class="columns-1 gap-4 sm:columns-2 xl:columns-3">
+    {
+      entries.map(([category, tags]) => (
+        <article class="mb-4 break-inside-avoid rounded-[20px] border border-line bg-paper p-5 shadow-[0_10px_28px_rgba(15,23,42,0.05)]">
+          <h3 class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate">{category}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {tags.map((term) => (
+              <li>
+                <span class="inline-flex rounded-full border border-line bg-paper px-3 py-1.5 text-[13px] leading-snug text-mist">
+                  {term}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</div>

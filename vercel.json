@@ -1,0 +1,14 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/contact/", "destination": "/contact", "permanent": true },
+    { "source": "/about/", "destination": "/about", "permanent": true },
+    { "source": "/refund/", "destination": "/refund", "permanent": true },
+    { "source": "/privacy/", "destination": "/privacy", "permanent": true },
+    { "source": "/terms/", "destination": "/terms", "permanent": true },
+    { "source": "/secure/login/", "destination": "/secure/login", "permanent": true },
+    { "source": "/secure/signup/", "destination": "/secure/signup", "permanent": true },
+    { "source": "/signup", "destination": "/secure/signup", "permanent": true },
+    { "source": "/signup/", "destination": "/secure/signup", "permanent": true }
+  ]
+}

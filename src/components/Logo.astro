@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+  textClass?: string;
+  iconClass?: string;
+}
+
+const {
+  class: className = '',
+  textClass = 'font-display text-lg font-bold tracking-tight text-ink md:text-xl',
+  iconClass = 'h-9 w-9',
+} = Astro.props;
+---
+
+<a href="/" class:list={['group inline-flex items-center gap-2.5', className]} aria-label="BuyAhref home">
+  <img
+    src="/images/brand-mark.webp"
+    alt=""
+    width="36"
+    height="36"
+    class:list={['shrink-0 rounded-full shadow-sm ring-1 ring-black/[0.06]', iconClass]}
+    decoding="async"
+  />
+  <span class={textClass}>
+    Buy<span class="text-brand">Ahref</span>
+  </span>
+</a>

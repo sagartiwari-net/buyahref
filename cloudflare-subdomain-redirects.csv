@@ -1,0 +1,25 @@
+source_url,target_url,status_code,preserved_query_string,comment
+https://tools.buyahref.com/,https://buyahref.com/tools,301,TRUE,Old tools subdomain → tools directory
+https://tools.buyahref.com/*,https://buyahref.com/tools,301,TRUE,Catch-all tools subdomain
+https://members.buyahref.com/,https://buyahref.com/secure/login,301,TRUE,Members portal → login
+https://members.buyahref.com/*,https://buyahref.com/secure/login,301,TRUE,Members catch-all
+https://auth.buyahref.com/,https://buyahref.com/secure/login,301,TRUE,Auth subdomain → login
+https://auth.buyahref.com/*,https://buyahref.com/secure/login,301,TRUE,Auth catch-all
+https://access.buyahref.com/,https://buyahref.com/secure/login,301,TRUE,Access subdomain → login
+https://access.buyahref.com/*,https://buyahref.com/secure/login,301,TRUE,Access catch-all
+https://sr.buyahref.com/,https://buyahref.com/,301,TRUE,Old keyword tool subdomain → homepage
+https://sr.buyahref.com/*,https://buyahref.com/,301,TRUE,SR catch-all
+https://shopind.buyahref.com/,https://buyahref.com/,301,TRUE,Shop India subdomain → homepage
+https://shopind.buyahref.com/*,https://buyahref.com/,301,TRUE,Shop India catch-all
+https://refs.buyahref.com/,https://buyahref.com/,301,TRUE,Refs subdomain → homepage
+https://refs.buyahref.com/*,https://buyahref.com/,301,TRUE,Refs catch-all
+https://ref.buyahref.com/,https://buyahref.com/,301,TRUE,Ref subdomain → homepage
+https://ref.buyahref.com/*,https://buyahref.com/,301,TRUE,Ref catch-all
+https://katteb.buyahref.com/,https://buyahref.com/,301,TRUE,Katteb subdomain → homepage (no dedicated page)
+https://katteb.buyahref.com/*,https://buyahref.com/,301,TRUE,Katteb catch-all
+https://freesem.buyahref.com/,https://buyahref.com/semrush-group-buy,301,TRUE,Free Semrush subdomain → Semrush guide
+https://freesem.buyahref.com/*,https://buyahref.com/semrush-group-buy,301,TRUE,Free Semrush catch-all
+https://azkw.buyahref.com/,https://buyahref.com/,301,TRUE,AZ KW subdomain → homepage
+https://azkw.buyahref.com/*,https://buyahref.com/,301,TRUE,AZ KW catch-all
+https://azind.buyahref.com/,https://buyahref.com/,301,TRUE,AZ India subdomain → homepage
+https://azind.buyahref.com/*,https://buyahref.com/,301,TRUE,AZ India catch-all

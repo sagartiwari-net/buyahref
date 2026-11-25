@@ -1,0 +1,35 @@
+---
+import { ADSENSE_CLIENT } from '../lib/ads';
+
+interface Props {
+  /** AdSense data-ad-slot id */
+  unit: string;
+  class?: string;
+}
+
+const { unit, class: className } = Astro.props;
+---
+
+<aside
+  class:list={['ad-unit mx-auto w-full max-w-3xl', className]}
+  aria-label="Advertisement"
+>
+  <p class="mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-slate/60">
+    Advertisement
+  </p>
+  {/* Reserved height reduces CLS; script loads only when near viewport */}
+  <div
+    class="min-h-[120px] overflow-hidden rounded-2xl border border-line/80 bg-canvas/40 md:min-h-[140px]"
+  >
+    <ins
+      class="adsbygoogle"
+      style="display:block;min-height:120px"
+      data-ad-client={ADSENSE_CLIENT}
+      data-ad-slot={unit}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+      data-adsense-lazy
+    >
+    </ins>
+  </div>
+</aside>

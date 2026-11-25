@@ -1,0 +1,26 @@
+---
+interface Props {
+  percent: string;
+  label: string;
+}
+
+const { percent, label } = Astro.props;
+const value = Number.parseInt(percent, 10) || 98;
+const deg = Math.round((value / 100) * 360);
+---
+
+<article class="flex flex-col items-center text-center sm:items-start sm:text-left">
+  <div
+    class="relative grid h-[5.5rem] w-[5.5rem] place-items-center rounded-full"
+    style={`background: conic-gradient(#5b48e0 ${deg}deg, #e8e8ee 0deg);`}
+    role="img"
+    aria-label={`${percent} accuracy`}
+  >
+    <div class="grid h-[4.35rem] w-[4.35rem] place-items-center rounded-full bg-paper">
+      <p class="font-display text-2xl font-extrabold leading-none text-ink">{percent}</p>
+    </div>
+  </div>
+  <p class="mt-4 max-w-[11.5rem] text-sm font-medium leading-snug text-mist">
+    {label}
+  </p>
+</article>

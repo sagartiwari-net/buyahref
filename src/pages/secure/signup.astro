@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CouponBand from '../../components/CouponBand.astro';
+import { SITE, MEMBERSHIP_PLANS, COUPON } from '../../lib/site';
+
+const title = 'Ahrefs Signup » ahrefs shop';
+const description =
+  'Sign up for BuyAhref group buy plans — Ahrefs, Master Plan, Lite Plan and more. Choose a membership and continue to ToolsMandi to buy.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: `${SITE.url}/secure/signup`,
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/secure/signup" jsonLd={jsonLd}>
+  <section class="border-b border-line bg-canvas">
+    <div class="container-narrow section-pad !pb-10 !pt-12 md:!pt-16">
+      <p class="eyebrow">Secure Signup</p>
+      <h1 class="heading-display mt-3 text-4xl md:text-5xl">Ahrefs Signup</h1>
+      <p class="mt-4 max-w-2xl text-base text-slate md:text-lg">
+        Choose a membership type below, then continue to ToolsMandi to create your account and complete payment.
+        If you already have an account,
+        <a href="/secure/login" class="font-semibold text-brand hover:underline">log in</a>
+        to continue.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad !pt-10">
+    <div class="container-narrow">
+      <div class="mb-8">
+        <CouponBand compact />
+      </div>
+
+      <div class="mb-8 flex flex-col gap-4 rounded-[24px] border border-brand/20 bg-brand-soft p-5 md:flex-row md:items-center md:justify-between md:p-6">
+        <div>
+          <p class="font-display text-lg font-bold text-ink">Ready to buy?</p>
+          <p class="mt-1 text-sm text-slate">
+            Checkout &amp; account creation happen securely on ToolsMandi. Apply{' '}
+            <strong class="text-ink">{COUPON.code}</strong> for {COUPON.discountLabel}.
+          </p>
+        </div>
+        <a href={SITE.signupUrl} class="btn-primary shrink-0" rel="noopener noreferrer">
+          Continue to Buy on ToolsMandi
+        </a>
+      </div>
+
+      <h2 class="heading-display text-2xl md:text-3xl">Membership Type</h2>
+      <p class="mt-2 text-slate">Pick the plan that fits you. Pricing shown for reference — final checkout is on ToolsMandi.</p>
+
+      <div class="mt-10 space-y-10">
+        {
+          MEMBERSHIP_PLANS.map((group) => (
+            <div>
+              <h3 class="font-display text-xl font-bold text-ink">{group.group}</h3>
+              <div class="mt-4 grid gap-3 md:grid-cols-2">
+                {group.items.map((item) => (
+                  <a
+                    href={SITE.signupUrl}
+                    class="group surface flex items-start justify-between gap-4 rounded-2xl p-5 transition hover:border-brand hover:shadow-[0_16px_40px_rgba(103,84,233,0.12)]"
+                    rel="noopener noreferrer"
+                  >
+                    <div>
+                      <p class="font-display text-base font-bold text-ink group-hover:text-brand">{item.name}</p>
+                      {'note' in item && item.note ? (
+                        <p class="mt-1 text-sm text-slate">{item.note}</p>
+                      ) : null}
+                      <p class="mt-2 text-xs font-medium uppercase tracking-wide text-brand">Buy on ToolsMandi →</p>
+                    </div>
+                    <div class="shrink-0 text-right">
+                      <p class="font-display text-xl font-extrabold text-ink">{item.price}</p>
+                      <p class="text-xs text-slate">{item.period}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-12 rounded-[24px] border border-line bg-paper p-6 md:p-8">
+        <h2 class="heading-display text-2xl">How signup works</h2>
+        <ol class="mt-5 space-y-3 text-sm text-mist md:text-base">
+          <li><strong class="text-ink">1.</strong> Choose any membership card above.</li>
+          <li><strong class="text-ink">2.</strong> You will open ToolsMandi signup.</li>
+          <li><strong class="text-ink">3.</strong> Create your account, pay, and get instant access.</li>
+          <li><strong class="text-ink">4.</strong> Come back anytime via <a href="/secure/login" class="text-brand hover:underline">BuyAhref Login</a>.</li>
+        </ol>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={SITE.signupUrl} class="btn-primary" rel="noopener noreferrer">Sign Up &amp; Buy</a>
+          <a href="/secure/login" class="btn-ghost">Already a member? Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

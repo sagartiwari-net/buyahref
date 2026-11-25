@@ -1,0 +1,17 @@
+---
+import { SITE } from '../../../lib/site';
+
+/**
+ * Legacy affiliate go links → ToolsMandi / signup.
+ * Cloudflare `_redirects` also maps `/secure/aff/*` for any deeper path.
+ */
+export function getStaticPaths() {
+  return [
+    { params: { path: undefined } },
+    { params: { path: 'go' } },
+    { params: { path: 'go/Sagar' } },
+  ];
+}
+
+return Astro.redirect(SITE.signupPage, 301);
+---

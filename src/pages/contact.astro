@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Contact » Buy Ahrefs';
+const description =
+  'Contact BuyAhref for Ahrefs group buy support. Continue to ToolsMandi signup for account help, billing, or membership questions.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/contact">
+  <section class="section-pad">
+    <div class="container-narrow grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 class="heading-display mt-4 text-4xl md:text-5xl">We’re here to help you grow</h1>
+        <p class="mt-5 text-lg text-slate">
+          Share a short note below and continue on ToolsMandi — that’s where BuyAhref memberships, support, and account
+          access are handled.
+        </p>
+
+        <div class="mt-10 space-y-6">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate">Sign up / Buy</p>
+            <a
+              href={SITE.signupUrl}
+              class="mt-1 block font-display text-xl font-bold text-brand hover:underline"
+              rel="noopener noreferrer"
+            >
+              toolsmandi.com/signup
+            </a>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate">Already a member?</p>
+            <a href="/secure/login" class="mt-1 block font-display text-xl font-bold text-ink hover:text-brand">
+              Ahrefs Login
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface p-6 md:p-8">
+        <h2 class="font-display text-2xl font-bold text-ink">Send a message</h2>
+        <p class="mt-2 text-sm text-slate">
+          Fill the form and continue to ToolsMandi to finish signup or reach support for your BuyAhref plan.
+        </p>
+        <form class="mt-8 space-y-4" action={SITE.signupUrl} method="get" rel="noopener noreferrer">
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Name</span>
+            <input
+              name="name"
+              type="text"
+              placeholder="Name"
+              class="w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Email</span>
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="Email"
+              class="w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Company name</span>
+            <input
+              name="company"
+              type="text"
+              placeholder="Company name"
+              class="w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Phone number</span>
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone number"
+              class="w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">What can we help you with?</span>
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="What can we help you with?"
+              class="w-full rounded-md border border-line bg-canvas px-4 py-3 text-sm"
+            ></textarea>
+          </label>
+          <button type="submit" class="btn-primary w-full">Continue to ToolsMandi</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

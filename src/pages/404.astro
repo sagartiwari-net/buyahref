@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+import { getTool } from '../lib/tools';
+
+const title = 'Page Not Found (404) | BuyAhref';
+const description =
+  'This BuyAhref page could not be found. Go home or open a popular group buy tool guide — Ahrefs, Semrush, Envato, and more.';
+
+const popularSlugs = [
+  'ahrefs-group-buy',
+  'semrush-group-buy',
+  'envato-elements-group-buy',
+  'moz-pro-group-buy',
+  'canva-pro-group-buy',
+  'jasper-ai-group-buy',
+  'grammarly-premium-group-buy',
+  'chatgpt-plus-group-buy',
+];
+
+const popular = popularSlugs.map((slug) => getTool(slug)).filter(Boolean);
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/404" noindex>
+  <section class="section-pad">
+    <div class="container-narrow">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Error 404</p>
+        <h1 class="heading-display mt-4 text-4xl md:text-6xl">Page not found</h1>
+        <p class="mt-5 text-base leading-relaxed text-slate md:text-lg">
+          That URL is missing or has moved. Use the links below to get back to BuyAhref — or open a popular group buy
+          tool guide so your visit still helps.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="/" class="btn-primary">Go to homepage</a>
+          <a href="/tools" class="btn-ghost">Browse all tools</a>
+          <a href={SITE.signupPage} class="btn-ghost">Sign Up</a>
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <h2 class="heading-display text-center text-2xl md:text-3xl">Popular BuyAhref tool guides</h2>
+        <p class="mx-auto mt-3 max-w-xl text-center text-slate">
+          These pages still rank and convert — pick the tool you need, then continue to ToolsMandi signup.
+        </p>
+        <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            popular.map(
+              (tool) =>
+                tool && (
+                  <li>
+                    <a
+                      href={`/${tool.slug}`}
+                      class="flex h-full items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-4 shadow-[0_10px_28px_rgba(15,23,42,0.05)] transition hover:border-brand"
+                    >
+                      {tool.thumbnail ? (
+                        <img
+                          src={tool.thumbnail}
+                          alt={`${tool.name} Group Buy on BuyAhref`}
+                          width="64"
+                          height="36"
+                          class="h-9 w-16 shrink-0 rounded-md object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <span
+                          class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-sm font-bold text-brand"
+                          aria-hidden="true"
+                        >
+                          {tool.name.slice(0, 1)}
+                        </span>
+                      )}
+                      <span class="min-w-0">
+                        <span class="block truncate font-display text-sm font-bold text-ink">{tool.name}</span>
+                        <span class="mt-0.5 block text-xs text-slate">Group Buy →</span>
+                      </span>
+                    </a>
+                  </li>
+                ),
+            )
+          }
+        </ul>
+      </div>
+
+      <p class="mt-12 text-center text-sm text-slate">
+        Need help?
+        <a href="/contact" class="font-semibold text-brand underline-offset-2 hover:underline">Contact BuyAhref</a>
+        or
+        <a href="/secure/login" class="font-semibold text-brand underline-offset-2 hover:underline">Login</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

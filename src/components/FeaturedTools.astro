@@ -1,0 +1,103 @@
+---
+import { getTool, TOOL_BY_SLUG, type Tool } from '../lib/tools';
+
+interface Props {
+  title?: string;
+  intro?: string;
+  slugs?: string[];
+  excludeSlug?: string;
+}
+
+const DEFAULT_SLUGS = [
+  'ahrefs-group-buy',
+  'semrush-group-buy',
+  'moz-pro-group-buy',
+  'envato-elements-group-buy',
+  'canva-pro-group-buy',
+  'jasper-ai-group-buy',
+  'grammarly-premium-group-buy',
+  'chatgpt-plus-group-buy',
+  'ubersuggest-group-buy',
+  'surfer-seo-group-buy',
+  'helium-10-group-buy',
+  'motionarray-group-buy',
+];
+
+const {
+  title = 'Popular group buy tool guides',
+  intro = 'Deep-dive pages for the tools members ask for most — each guide is written for BuyAhref and links into ToolsMandi signup.',
+  slugs = DEFAULT_SLUGS,
+  excludeSlug,
+} = Astro.props;
+
+const tools = slugs
+  .map((slug) => getTool(slug) || TOOL_BY_SLUG[slug])
+  .filter((t): t is Tool => Boolean(t) && t.slug !== excludeSlug)
+  .slice(0, 12);
+---
+
+{
+  tools.length > 0 && (
+    <section class="section-pad border-b border-line bg-canvas" aria-labelledby="featured-tools-heading">
+      <div class="container-narrow">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Tool guides</p>
+          <h2 id="featured-tools-heading" class="heading-display mt-3 text-3xl md:text-4xl">
+            {title}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate md:text-lg">{intro}</p>
+        </div>
+
+        <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {tools.map((tool) => (
+            <li>
+              <a
+                href={`/${tool.slug}`}
+                class="flex h-full items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-4 shadow-[0_10px_28px_rgba(15,23,42,0.05)] transition hover:border-brand"
+              >
+                {tool.thumbnail ? (
+                  <img
+                    src={tool.thumbnail}
+                    alt={`${tool.name} Group Buy on BuyAhref`}
+                    width="72"
+                    height="40"
+                    class="h-10 w-[4.5rem] shrink-0 rounded-md object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : tool.image ? (
+                  <img
+                    src={tool.image}
+                    alt={`${tool.name} Group Buy on BuyAhref`}
+                    width="40"
+                    height="40"
+                    class="h-10 w-10 shrink-0 rounded-lg bg-canvas object-contain p-1"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span
+                    class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-soft text-sm font-bold text-brand"
+                    aria-hidden="true"
+                  >
+                    {tool.name.slice(0, 1)}
+                  </span>
+                )}
+                <span class="min-w-0">
+                  <span class="block truncate font-display text-sm font-bold text-ink">{tool.name}</span>
+                  <span class="mt-0.5 block text-xs font-medium text-slate">Group Buy guide →</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p class="mt-8 text-sm text-slate">
+          <a href="/tools" class="font-semibold text-brand underline-offset-2 hover:underline">
+            Browse all BuyAhref tools
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}

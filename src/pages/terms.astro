@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Terms & Conditions » Buy Ahrefs';
+const description =
+  'Terms and conditions for using BuyAhref.com and purchasing Ahrefs group buy access via ToolsMandi.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/terms">
+  <section class="section-pad">
+    <div class="container-narrow max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="heading-display mt-4 text-4xl md:text-5xl">Terms &amp; Conditions</h1>
+      <div class="mt-8 space-y-5 text-base leading-relaxed text-slate">
+        <p>Last updated: November 24, 2026</p>
+        <p>
+          By using BuyAhref.com you agree to these terms. If you do not agree, please do not use the site.
+        </p>
+        <h2 class="heading-display pt-2 text-2xl text-ink">Service description</h2>
+        <p>
+          BuyAhref is a marketing and access gateway for affordable Ahrefs group buy style plans fulfilled through
+          ToolsMandi. We are not the official Ahrefs website and are not affiliated with Ahrefs Pte. Ltd.
+        </p>
+        <h2 class="heading-display pt-2 text-2xl text-ink">Accounts &amp; purchases</h2>
+        <p>
+          Account creation, billing, and tool access are provided on
+          <a href={SITE.signupUrl} class="text-brand hover:underline" rel="noopener noreferrer">toolsmandi.com/signup</a>.
+          You are responsible for keeping your login credentials secure and for complying with ToolsMandi’s terms.
+        </p>
+        <h2 class="heading-display pt-2 text-2xl text-ink">Acceptable use</h2>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>Do not abuse, resell, or publicly share shared credentials without authorization</li>
+          <li>Do not attempt to disrupt service availability</li>
+          <li>Do not use the service for unlawful activity</li>
+        </ul>
+        <h2 class="heading-display pt-2 text-2xl text-ink">Disclaimer</h2>
+        <p>
+          Tool uptime depends on third-party platforms. Features and included apps may change based on ToolsMandi
+          plan availability. BuyAhref is provided on an “as available” basis.
+        </p>
+        <h2 class="heading-display pt-2 text-2xl text-ink">Contact</h2>
+        <p>
+          <a href={`mailto:${SITE.email}`} class="text-brand hover:underline">{SITE.email}</a> ·
+          <a href={SITE.phoneHref} class="text-brand hover:underline">{SITE.phone}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,16 @@
+# BuyAhref.com — https://buyahref.com
+User-agent: *
+Allow: /
+
+# Google AdSense crawler
+User-agent: Mediapartners-Google
+Allow: /
+
+# Common AI / research crawlers (allowed — public marketing site)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://buyahref.com/sitemap-index.xml

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import { TOOLS } from '../../lib/tools';
+import { SITE } from '../../lib/site';
+import { SITE_FAQ, faqJsonLd } from '../../lib/faq';
+
+const byCategory = TOOLS.reduce(
+  (acc, tool) => {
+    (acc[tool.category] ||= []).push(tool);
+    return acc;
+  },
+  {} as Record<string, typeof TOOLS>,
+);
+
+const labels: Record<string, string> = {
+  seo: 'SEO & Research',
+  writing: 'AI Writing & Editing',
+  creative: 'Creative & Stock',
+  amazon: 'Amazon & Ecommerce',
+  learning: 'Learning',
+  streaming: 'Streaming',
+  other: 'More tools',
+};
+
+const order = ['seo', 'writing', 'creative', 'amazon', 'learning', 'streaming', 'other'];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'SEO & Marketing Tools Group Buy | BuyAhref',
+      description:
+        'Browse Ahrefs, Semrush, Moz Pro, Envato Elements, and 70+ premium tools available through BuyAhref group buy membership.',
+      url: `${SITE.url}/tools`,
+    },
+    faqJsonLd(SITE_FAQ),
+  ],
+};
+---
+
+<BaseLayout
+  title="SEO Tools Group Buy Directory | Ahrefs, Semrush & More | BuyAhref"
+  description="Browse Ahrefs group buy, Semrush group buy, Moz Pro, Envato Elements, Canva Pro, and 70+ premium SEO tools. Affordable group-buy membership on ToolsMandi."
+  canonicalPath="/tools"
+  keywords="seo tools group buy, ahrefs group buy, semrush group buy, moz pro group buy, buy ahrefs cheap, ToolsMandi, BuyAhref"
+  jsonLd={jsonLd}
+>
+  <section class="section-pad border-b border-line">
+    <div class="container-narrow">
+      <p class="eyebrow">Tool directory</p>
+      <h1 class="heading-display mt-3 max-w-3xl text-3xl md:text-5xl">
+        Premium tools available with BuyAhref
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate md:text-lg">
+        Explore every BuyAhref group-buy tool page — SEO, AI writing, creative stock, Amazon research, and more.
+        Each guide links to signup on ToolsMandi so you can start in one membership.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={SITE.signupPage} class="btn-primary">Sign Up</a>
+        <a href={SITE.signupUrl} class="btn-ghost" rel="noopener noreferrer">Buy on ToolsMandi</a>
+      </div>
+    </div>
+  </section>
+
+  {
+    order.map((key) => {
+      const items = byCategory[key];
+      if (!items?.length) return null;
+      return (
+        <section class="border-b border-line py-12 md:py-16">
+          <div class="container-narrow px-5 md:px-8 lg:px-12">
+            <h2 class="heading-display text-2xl md:text-3xl">{labels[key]}</h2>
+            <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {items.map((tool) => (
+                <li>
+                  <a
+                    href={`/${tool.slug}`}
+                    class="flex items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-4 shadow-[0_10px_28px_rgba(15,23,42,0.05)] transition hover:border-brand"
+                  >
+                    {tool.thumbnail ? (
+                      <img
+                        src={tool.thumbnail}
+                        alt={`${tool.name} Group Buy`}
+                        width="96"
+                        height="54"
+                        class="h-12 w-[5.4rem] shrink-0 rounded-lg object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : tool.image ? (
+                      <img
+                        src={tool.image}
+                        alt={`${tool.name} Group Buy`}
+                        width="36"
+                        height="36"
+                        class="h-9 w-9 rounded-xl bg-canvas object-contain p-1.5"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : null}
+                    <span>
+                      <span class="block font-display text-sm font-bold text-ink">{tool.name}</span>
+                      <span class="mt-0.5 block text-xs text-slate">Group Buy page →</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <FaqSection
+    heading="BuyAhref tools FAQ"
+    intro="How group buy access works across the BuyAhref tool directory — refunds, login, and account rules."
+  />
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Refund » Buy Ahrefs';
+const description =
+  'BuyAhref refund policy for Ahrefs group buy plans. Learn when refunds apply and how to request support.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/refund">
+  <section class="section-pad">
+    <div class="container-narrow max-w-3xl">
+      <p class="eyebrow">Policy</p>
+      <h1 class="heading-display mt-4 text-4xl md:text-5xl">Refund Policy</h1>
+      <div class="mt-8 space-y-5 text-base leading-relaxed text-slate">
+        <p>
+          We want you to have a smooth experience with BuyAhref group buy access. Because digital tool access is
+          provisioned immediately after payment, refunds are limited.
+        </p>
+        <h2 class="heading-display pt-4 text-2xl text-ink">When refunds may apply</h2>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>Duplicate payment charged in error</li>
+          <li>Access not delivered within a reasonable time after successful payment</li>
+          <li>Verified billing issues caused by our checkout partner</li>
+        </ul>
+        <h2 class="heading-display pt-4 text-2xl text-ink">When refunds usually do not apply</h2>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>Change of mind after access has been granted</li>
+          <li>Partial usage of a plan period</li>
+          <li>Third-party tool downtime outside our control</li>
+        </ul>
+        <h2 class="heading-display pt-4 text-2xl text-ink">How to request help</h2>
+        <p>
+          Email <a href={`mailto:${SITE.email}`} class="text-brand hover:underline">{SITE.email}</a> or call
+          <a href={SITE.phoneHref} class="text-brand hover:underline">{SITE.phone}</a> with your order email,
+          payment reference, and a short description of the issue. For account-level billing on ToolsMandi, you may
+          also contact support after
+          <a href={SITE.signupUrl} class="text-brand hover:underline" rel="noopener noreferrer">signing in</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,176 @@
+---
+import type { Tool } from '../lib/tools';
+import { getRelatedTools, TOOL_BUY_URL, TOOL_SIGNUP_PATH } from '../lib/tools';
+import ToolVisual from './ToolVisual.astro';
+import ToolStickyPanel from './ToolStickyPanel.astro';
+import FaqSection from './FaqSection.astro';
+import AdSlot from './AdSlot.astro';
+import { toolFaq } from '../lib/faq';
+import { AD_SLOTS } from '../lib/ads';
+
+interface Props {
+  tool: Tool;
+}
+
+const { tool } = Astro.props;
+const related = getRelatedTools(tool.slug, 8);
+const faqs = toolFaq(tool.name);
+---
+
+<article>
+  <!-- HERO: text + visual side by side -->
+  <header class="relative border-b border-line bg-paper">
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-[60%] bg-[radial-gradient(ellipse_at_top_left,_rgba(91,72,224,0.08),_transparent_55%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="container-narrow relative grid items-center gap-10 px-5 pb-12 pt-10 md:gap-12 md:px-8 md:pb-16 md:pt-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14 lg:px-12"
+    >
+      <div class="max-w-2xl lg:max-w-none">
+        <p class="eyebrow">Buy {tool.name} · Group Buy</p>
+        <h1 class="heading-display mt-3 text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+          {tool.h1.includes('Group Buy') ? tool.h1 : `${tool.name} Group Buy`}
+        </h1>
+        <p class="mt-5 text-base leading-relaxed text-slate md:text-lg">
+          {tool.description}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={TOOL_SIGNUP_PATH} class="btn-primary">Sign Up</a>
+          <a href={TOOL_BUY_URL} class="btn-ghost" rel="noopener noreferrer">Buy on ToolsMandi</a>
+        </div>
+        <p class="mt-4 text-sm text-slate">
+          Already a member?
+          <a href="/secure/login" class="font-semibold text-brand underline-offset-2 hover:underline">Login here</a>
+        </p>
+      </div>
+
+      <div class="mx-auto w-full max-w-[320px] lg:mx-0 lg:justify-self-end lg:max-w-[360px]">
+        <ToolVisual tool={tool} eager />
+      </div>
+    </div>
+  </header>
+
+  <!-- BODY: compact sticky panel (desktop) + scrolling content -->
+  <div class="border-b border-line px-5 py-12 md:px-8 md:py-16 lg:px-12 lg:py-20">
+    <div class="container-narrow grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start lg:gap-12 xl:grid-cols-[300px_minmax(0,1fr)]">
+      <aside class="relative z-10 hidden self-start lg:block lg:sticky lg:top-24">
+        <ToolStickyPanel tool={tool} />
+      </aside>
+
+      <div class="min-w-0 space-y-6 md:space-y-8">
+        {/* Mobile CTA strip — sticky panel is desktop-only */}
+        <div class="rounded-2xl border border-line bg-canvas p-4 lg:hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <p class="text-sm font-semibold text-ink">{tool.name} group buy</p>
+            <a href={TOOL_BUY_URL} class="btn-primary !px-5 !py-2.5 text-xs" rel="noopener noreferrer">
+              Buy Now
+            </a>
+          </div>
+        </div>
+
+        {
+          tool.sections.map((section, i) => (
+            <>
+              <section class="rounded-[24px] border border-line bg-paper p-6 shadow-[0_14px_40px_rgba(15,23,42,0.05)] md:p-8">
+                <h2 class="heading-display text-xl md:text-2xl">{section.heading}</h2>
+                {section.paragraphs.map((p) => (
+                  <p class="mt-4 text-base leading-relaxed text-slate">{p}</p>
+                ))}
+              </section>
+              {/* After first section — clear of first paint; lazy "Above Tool" */}
+              {i === 0 ? <AdSlot unit={AD_SLOTS.aboveTool} class="!max-w-none" /> : null}
+            </>
+          ))
+        }
+
+        {/* End of article — "Below Tool" */}
+        <AdSlot unit={AD_SLOTS.belowTool} class="!max-w-none" />
+      </div>
+    </div>
+  </div>
+
+  <div class="section-pad border-b border-line bg-canvas">
+    <div class="container-narrow">
+      <div class="overflow-hidden rounded-[28px] border border-line bg-paper p-6 shadow-[0_18px_48px_rgba(15,23,42,0.07)] md:flex md:items-center md:justify-between md:gap-10 md:p-10">
+        <div class="max-w-2xl">
+          <h2 class="heading-display text-2xl md:text-3xl">Get {tool.name} with BuyAhref</h2>
+          <p class="mt-4 text-base leading-relaxed text-slate">
+            Join BuyAhref for affordable group-buy access to {tool.name} and 20+ premium SEO, writing, and creative
+            tools — all in one membership on ToolsMandi.
+          </p>
+        </div>
+        <div class="mt-8 flex shrink-0 flex-wrap gap-3 md:mt-0">
+          <a href={TOOL_SIGNUP_PATH} class="btn-primary">Sign Up</a>
+          <a href={TOOL_BUY_URL} class="btn-ghost" rel="noopener noreferrer">Buy on ToolsMandi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <FaqSection
+    items={faqs}
+    heading={`${tool.name} group buy FAQ`}
+    intro={`Common questions about ${tool.name} group buy on BuyAhref — access, refunds, and account rules.`}
+    id={`${tool.slug}-faq`}
+    imageAlt={`${tool.name} group buy on BuyAhref — FAQ cover for access, refunds, and ToolsMandi member support`}
+  />
+
+  <aside class="section-pad border-b border-line" aria-labelledby="related-tools-heading">
+    <div class="container-narrow">
+      <h2 id="related-tools-heading" class="heading-display text-2xl md:text-3xl">
+        Related group buy tools
+      </h2>
+      <p class="mt-3 max-w-2xl text-slate">
+        Explore more premium tools available through BuyAhref — each page links back so you can compare workflows.
+      </p>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          related.map((item) => (
+            <li>
+              <a
+                href={`/${item.slug}`}
+                class="flex items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-4 shadow-[0_10px_28px_rgba(15,23,42,0.05)] transition hover:border-brand"
+              >
+                {item.thumbnail ? (
+                  <img
+                    src={item.thumbnail}
+                    alt={`${item.name} Group Buy on BuyAhref`}
+                    width="64"
+                    height="36"
+                    class="h-9 w-16 shrink-0 rounded-md object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : item.image ? (
+                  <img
+                    src={item.image}
+                    alt={`${item.name} Group Buy on BuyAhref`}
+                    width="32"
+                    height="32"
+                    class="h-8 w-8 rounded-lg bg-canvas object-contain p-1"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-soft text-xs font-bold text-brand" aria-hidden="true">
+                    {item.name.slice(0, 1)}
+                  </span>
+                )}
+                <span>
+                  <span class="block text-sm font-semibold text-ink">{item.name}</span>
+                  <span class="mt-0.5 block text-xs font-medium text-slate">Group Buy →</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-8 text-sm text-slate">
+        <a href="/tools" class="font-semibold text-brand underline-offset-2 hover:underline">View all tools</a>
+      </p>
+    </div>
+  </aside>
+</article>

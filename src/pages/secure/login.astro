@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/site';
+
+const title = 'Ahrefs Login » ahrefs sign in';
+const description =
+  'Login to your BuyAhref account to access group buy Ahrefs. Sign in securely via ToolsMandi and open Ahrefs, Semrush, and other premium SEO tools.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: `${SITE.url}/secure/login`,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+  },
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/secure/login" jsonLd={jsonLd}>
+  <section class="section-pad">
+    <div class="container-narrow grid items-start gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <div class="fade-up">
+        <p class="eyebrow">Member Access</p>
+        <h1 class="heading-display mt-4 text-4xl md:text-5xl lg:text-6xl">Ahrefs Login</h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-slate">
+          Already a BuyAhref member? Sign in to access group buy Ahrefs and your full ToolsMandi dashboard.
+          New here? Create an account first, then return to login.
+        </p>
+        <ul class="mt-8 space-y-3 text-sm text-mist/90 md:text-base">
+          <li class="flex gap-3">
+            <span class="text-brand" aria-hidden="true">01</span>
+            Open the login portal below
+          </li>
+          <li class="flex gap-3">
+            <span class="text-brand" aria-hidden="true">02</span>
+            Enter your ToolsMandi username/email &amp; password
+          </li>
+          <li class="flex gap-3">
+            <span class="text-brand" aria-hidden="true">03</span>
+            Select Ahrefs and start working
+          </li>
+        </ul>
+      </div>
+
+      <div class="fade-up-delay surface mx-auto w-full max-w-md p-7 md:p-9">
+        <h2 class="font-display text-2xl font-bold text-ink">Login to your account</h2>
+        <p class="mt-2 text-sm text-slate">
+          Secure authentication is handled on ToolsMandi. Click below to continue to Ahrefs sign in.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Username/Email</span>
+            <input
+              type="text"
+              placeholder="Username/Email..."
+              class="w-full rounded-md border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-slate/60"
+              disabled
+              aria-disabled="true"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate">Password</span>
+            <input
+              type="password"
+              placeholder="Password..."
+              class="w-full rounded-md border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-slate/60"
+              disabled
+              aria-disabled="true"
+            />
+          </label>
+          <a href={SITE.loginUrl} class="btn-primary w-full" rel="noopener noreferrer">
+            Continue to Login
+          </a>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-2 text-sm text-slate">
+          <a href={SITE.signupUrl} class="text-brand hover:underline" rel="noopener noreferrer">
+            Forgot password? Reset on ToolsMandi
+          </a>
+          <p>
+            Not registered yet?
+            <a href={SITE.signupPage} class="font-semibold text-brand hover:underline">
+              Signup here
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad !pt-0">
+    <div class="container-narrow max-w-3xl">
+      <h2 class="heading-display text-2xl md:text-3xl">Ahrefs Sign In Help</h2>
+      <div class="mt-6 space-y-5 text-sm leading-relaxed text-slate md:text-base">
+        <p>
+          Looking for <strong class="text-ink">ahrefs login</strong>, <strong class="text-ink">ahrefs sign in</strong>,
+          or <strong class="text-ink">ahref login</strong>? This page is the BuyAhref member gateway for group buy
+          access — not the official Ahrefs corporate login.
+        </p>
+        <p>
+          After you purchase on ToolsMandi, use the same credentials here via Continue to Login. From your dashboard
+          you can open Ahrefs servers, Semrush, Envato Elements, and other included tools.
+        </p>
+        <p>
+          Need a new account? Use
+          <a href={SITE.signupPage} class="text-brand hover:underline">Ahrefs Sign Up</a>
+          to choose a plan, then buy on ToolsMandi and return to this login page anytime.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

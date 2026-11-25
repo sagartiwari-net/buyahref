@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AdSenseLoader from '../components/AdSenseLoader.astro';
+import { SITE } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogType?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  preloadImage?: string;
+  ogImage?: string;
+  keywords?: string;
+}
+
+const {
+  title = SITE.defaultTitle,
+  description = SITE.defaultDescription,
+  canonicalPath = Astro.url.pathname,
+  ogType = 'website',
+  noindex = false,
+  jsonLd,
+  preloadImage,
+  ogImage,
+  keywords,
+} = Astro.props;
+
+const cleanPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/$/, '');
+const canonical = new URL(cleanPath, SITE.url).href;
+const robots = noindex
+  ? 'noindex, nofollow'
+  : 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large';
+const defaultOgPath = '/images/plans-overview.webp';
+const shareImage = ogImage
+  ? new URL(ogImage, SITE.url).href
+  : new URL(defaultOgPath, SITE.url).href;
+const usingDefaultOg = !ogImage;
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content={SITE.name} />
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
+    {/* Crawlens / Astro SEO: skip canonical on noindex pages to avoid conflicting signals */}
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" title="Sitemap" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/images/brand-mark.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#005ceb" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:secure_url" content={shareImage} />
+    <meta property="og:image:alt" content={title} />
+    {usingDefaultOg && <meta property="og:image:type" content="image/webp" />}
+    {usingDefaultOg && <meta property="og:image:width" content="1200" />}
+    {usingDefaultOg && <meta property="og:image:height" content="583" />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <link
+      rel="preload"
+      href="/fonts/syne-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/kanit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    {
+      preloadImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={preloadImage}
+          type="image/webp"
+          fetchpriority="high"
+        />
+      )
+    }
+
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <AdSenseLoader />
+  </body>
+</html>

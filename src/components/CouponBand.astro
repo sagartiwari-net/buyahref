@@ -1,0 +1,49 @@
+---
+import { SITE, COUPON } from '../lib/site';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section
+  class:list={!compact && 'section-pad border-b border-line bg-paper'}
+  aria-labelledby="coupon-heading"
+>
+  <div class:list={!compact && 'container-narrow'}>
+    <div
+      class="relative overflow-hidden rounded-[24px] border border-brand/25 bg-brand-soft px-5 py-8 shadow-[0_18px_48px_rgba(103,84,233,0.12)] md:px-10 md:py-10"
+    >
+      <div
+        class="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-brand/15 blur-2xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative grid items-center gap-6 md:grid-cols-[1.2fr_auto] md:gap-10">
+        <div>
+          <p class="eyebrow">Coupon · ToolsMandi</p>
+          <h2 id="coupon-heading" class="heading-display mt-3 text-2xl md:text-4xl">
+            Save {COUPON.discountLabel} with code {COUPON.code}
+          </h2>
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-slate md:text-base">
+            {COUPON.blurb} Enter the code on ToolsMandi during checkout — it is already active on our partner
+            account.
+          </p>
+        </div>
+        <div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:flex-col md:items-end">
+          <p
+            class="select-all rounded-2xl border-2 border-dashed border-brand bg-paper px-6 py-4 text-center font-display text-2xl font-extrabold tracking-[0.12em] text-ink md:text-3xl"
+            aria-label={`Coupon code ${COUPON.code}`}
+          >
+            {COUPON.code}
+          </p>
+          <a href={SITE.signupUrl} class="btn-primary whitespace-nowrap" rel="noopener noreferrer">
+            Apply on ToolsMandi
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

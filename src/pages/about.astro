@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../lib/site';
+
+const title = 'About » Buy Ahrefs';
+const description =
+  'Learn about BuyAhref — an affordable Ahrefs group buy service helping marketers access premium SEO tools without enterprise pricing.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/about">
+  <section class="section-pad">
+    <div class="container-narrow max-w-3xl">
+      <p class="eyebrow">About</p>
+      <h1 class="heading-display mt-4 text-4xl md:text-5xl">About BuyAhref</h1>
+      <div class="mt-8 space-y-5 text-base leading-relaxed text-slate md:text-lg">
+        <p>
+          BuyAhref.com helps SEO professionals, freelancers, and agencies get affordable access to Ahrefs and
+          other premium marketing tools through a group buy model.
+        </p>
+        <p>
+          Official Ahrefs plans are powerful but expensive for many users. Our service connects you to
+          shared-access pricing so you can run keyword research, backlink analysis, site audits, and content
+          research without paying full enterprise rates.
+        </p>
+        <p>
+          Purchases and account management are handled securely on
+          <a href={SITE.signupUrl} class="text-brand hover:underline" rel="noopener noreferrer">ToolsMandi</a>.
+          BuyAhref is your discovery and login gateway optimized for searches like ahrefs group buy, buy ahrefs
+          cheap, and ahrefs login.
+        </p>
+        <p>
+          BuyAhref is an independent service and is not affiliated with, endorsed by, or sponsored by Ahrefs Pte.
+          Ltd. or ahrefs.com.
+        </p>
+      </div>
+    </div>
+  </section>
+  <CtaBand heading="Join BuyAhref today" text="Sign up on ToolsMandi and start using Ahrefs at group-buy pricing." />
+</BaseLayout>

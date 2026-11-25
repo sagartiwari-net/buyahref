@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolPage from '../components/ToolPage.astro';
+import { getTool, TOOL_SLUGS, toolThumbMobile } from '../lib/tools';
+import { SITE } from '../lib/site';
+import { faqJsonLd, toolFaq } from '../lib/faq';
+
+export function getStaticPaths() {
+  return TOOL_SLUGS.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const tool = getTool(slug!);
+
+if (!tool) {
+  return Astro.redirect('/');
+}
+
+const pageUrl = `${SITE.url}/${tool.slug}`;
+const imageUrl = tool.thumbnail
+  ? `${SITE.url}${tool.thumbnail}`
+  : `${SITE.url}/images/header-site-audit.webp`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: tool.title,
+      description: tool.description,
+      isPartOf: { '@id': `${SITE.url}/#website` },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: imageUrl,
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: SITE.url,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: `${SITE.url}/tools`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: `${tool.name} Group Buy`,
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: `${tool.name} Group Buy`,
+      description: tool.description,
+      provider: {
+        '@type': 'Organization',
+        name: SITE.name,
+        url: SITE.url,
+      },
+      areaServed: 'Worldwide',
+      serviceType: 'SEO tools group buy membership',
+      url: pageUrl,
+      image: imageUrl,
+      offers: {
+        '@type': 'Offer',
+        url: SITE.signupUrl,
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.defaultDescription,
+    },
+    faqJsonLd(toolFaq(tool.name)),
+  ],
+};
+---
+
+<BaseLayout
+  title={tool.title}
+  description={tool.description}
+  canonicalPath={`/${tool.slug}`}
+  keywords={tool.keywords}
+  ogImage={tool.thumbnail}
+  ogType="article"
+  jsonLd={jsonLd}
+  preloadImage={toolThumbMobile(tool)}
+>
+  <ToolPage tool={tool} />
+</BaseLayout>

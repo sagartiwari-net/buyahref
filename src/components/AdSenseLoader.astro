@@ -1,0 +1,87 @@
+---
+import { ADSENSE_CLIENT } from '../lib/ads';
+---
+
+{/* Loads AdSense only after window load + when a unit nears the viewport */}
+<script is:inline define:vars={{ ADSENSE_CLIENT }}>
+  (function () {
+    var CLIENT = ADSENSE_CLIENT;
+    var scriptLoading = false;
+    var scriptReady = false;
+    var waiters = [];
+
+    function fill(el) {
+      if (!el || el.getAttribute('data-adsense-filled') === '1') return;
+      el.setAttribute('data-adsense-filled', '1');
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {}
+    }
+
+    function whenReady(fn) {
+      if (scriptReady) {
+        fn();
+        return;
+      }
+      waiters.push(fn);
+      if (scriptLoading) return;
+      scriptLoading = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(CLIENT);
+      s.crossOrigin = 'anonymous';
+      s.onload = function () {
+        scriptReady = true;
+        var q = waiters.slice();
+        waiters = [];
+        q.forEach(function (fn) {
+          try {
+            fn();
+          } catch (e) {}
+        });
+      };
+      s.onerror = function () {
+        scriptLoading = false;
+      };
+      document.head.appendChild(s);
+    }
+
+    function observe() {
+      var nodes = document.querySelectorAll('ins.adsbygoogle[data-adsense-lazy]');
+      if (!nodes.length) return;
+
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            io.unobserve(el);
+            whenReady(function () {
+              fill(el);
+            });
+          });
+        },
+        /* Prefetch slightly before view — not on first paint */
+        { rootMargin: '160px 0px', threshold: 0.01 },
+      );
+
+      for (var i = 0; i < nodes.length; i++) io.observe(nodes[i]);
+    }
+
+    function start() {
+      var run = function () {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function () {
+            observe();
+          }, { timeout: 2500 });
+        } else {
+          setTimeout(observe, 1200);
+        }
+      };
+      if (document.readyState === 'complete') run();
+      else window.addEventListener('load', run, { once: true });
+    }
+
+    start();
+  })();
+</script>

@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts — no Google Fonts round-trip / late-swap CLS */
+@font-face {
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+  src: url("/fonts/syne-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 800;
+  font-display: optional;
+  src: url("/fonts/syne-latin-800-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url("/fonts/kanit-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 600;
+  font-display: optional;
+  src: url("/fonts/kanit-latin-600-normal.woff2") format("woff2");
+}
+
+/* Metric-matched fallbacks so first paint matches Syne/Kanit if optional misses */
+@font-face {
+  font-family: "Syne Fallback";
+  src: local("Arial");
+  size-adjust: 105%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Kanit Fallback";
+  src: local("Arial");
+  size-adjust: 102%;
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+@theme {
+  --font-display: "Syne", "Syne Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Kanit", "Kanit Fallback", ui-sans-serif, system-ui, sans-serif;
+
+  /* Old BuyAhref / Numerique palette — brand text darkened for WCAG AA */
+  --color-brand: #5b48e0;
+  --color-brand-soft: #ebe8ff;
+  --color-brand-muted: #a89eeb;
+  --color-ink: #000000;
+  --color-body: #000000b3;
+  --color-paper: #ffffff;
+  --color-canvas: #f7f7fa;
+  --color-line: #e2e2e2;
+  --color-gold: #ffbe11;
+  --color-slate: #4b5563;
+  --color-mist: #374151;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-body antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(103, 84, 233, 0.25);
+    color: #000;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pad {
+    @apply px-5 py-16 md:px-8 md:py-20 lg:px-12 lg:py-24;
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full max-w-[1280px];
+  }
+
+  .eyebrow {
+    @apply font-display text-xs font-bold uppercase tracking-[0.18em] text-brand;
+  }
+
+  .heading-display {
+    @apply font-display font-bold tracking-[-0.03em] text-ink;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 font-display text-sm font-bold tracking-wide text-white transition duration-200 hover:bg-brand hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink/25 bg-paper px-7 py-3.5 font-display text-sm font-semibold tracking-wide text-ink transition duration-200 hover:border-brand hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .surface {
+    @apply border border-line bg-paper shadow-[0_12px_40px_rgba(0,0,0,0.05)];
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+  }
+}
