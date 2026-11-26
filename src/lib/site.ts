@@ -1,9 +1,6 @@
 export const SITE = {
   name: 'BuyAhref',
   url: 'https://buyahref.com',
-  email: 'buyahref@gmail.com',
-  phone: '+91 88490-09707',
-  phoneHref: 'tel:+918849009707',
   signupUrl: 'https://toolsmandi.com/signup',
   loginUrl: 'https://toolsmandi.com/signup',
   signupPage: '/secure/signup',

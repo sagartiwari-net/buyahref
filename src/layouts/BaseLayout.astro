@@ -13,6 +13,8 @@ interface Props {
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   preloadImage?: string;
+  preloadImageSrcset?: string;
+  preloadImageSizes?: string;
   ogImage?: string;
   keywords?: string;
 }
@@ -25,6 +27,8 @@ const {
   noindex = false,
   jsonLd,
   preloadImage,
+  preloadImageSrcset,
+  preloadImageSizes,
   ogImage,
   keywords,
 } = Astro.props;
@@ -81,7 +85,21 @@ const usingDefaultOg = !ogImage;
     <meta name="twitter:image" content={shareImage} />
     <meta name="twitter:image:alt" content={title} />
 
-    {/* Only above-the-fold weights — avoids long critical-path chains */}
+    {
+      preloadImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={preloadImage}
+          type="image/webp"
+          fetchpriority="high"
+          imagesrcset={preloadImageSrcset}
+          imagesizes={preloadImageSizes}
+        />
+      )
+    }
+
+    {/* Only the two weights actually used — keeps them off a long font chain */}
     <link
       rel="preload"
       href="/fonts/syne-latin-700-normal.woff2"
@@ -96,18 +114,6 @@ const usingDefaultOg = !ogImage;
       type="font/woff2"
       crossorigin
     />
-
-    {
-      preloadImage && (
-        <link
-          rel="preload"
-          as="image"
-          href={preloadImage}
-          type="image/webp"
-          fetchpriority="high"
-        />
-      )
-    }
 
     {
       jsonLd && (

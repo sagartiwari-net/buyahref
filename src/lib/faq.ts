@@ -1,5 +1,3 @@
-import { SITE } from './site';
-
 export type FaqItem = {
   question: string;
   answer: string;
@@ -9,7 +7,8 @@ export type FaqItem = {
 export const SITE_FAQ: FaqItem[] = [
   {
     question: 'Do you offer refunds?',
-    answer: `BuyAhref may initiate a refund when a primary tool does not work for three or more consecutive days, or when access is not delivered after a successful payment. Change of mind after access is granted usually does not qualify. See our refund policy or email ${SITE.email} for help.`,
+    answer:
+      'BuyAhref may initiate a refund when a primary tool does not work for three or more consecutive days, or when access is not delivered after a successful payment. Change of mind after access is granted usually does not qualify. See our refund policy or the contact page for help.',
   },
   {
     question: 'How do I get access to group buy SEO tools?',

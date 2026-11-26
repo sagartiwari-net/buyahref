@@ -26,8 +26,7 @@ const jsonLd = {
       '@type': 'Organization',
       name: SITE.name,
       url: SITE.url,
-      email: SITE.email,
-      telephone: SITE.phone,
+      logo: `${SITE.url}/images/brand-mark.webp`,
     },
     faqJsonLd(SITE_FAQ),
   ],
@@ -137,6 +136,8 @@ const trusted = [
   canonicalPath="/"
   jsonLd={jsonLd}
   preloadImage="/images/header-site-audit.webp"
+  preloadImageSrcset="/images/header-site-audit-320.webp 320w, /images/header-site-audit.webp 420w"
+  preloadImageSizes="(min-width: 1024px) 290px, 300px"
 >
   <!-- HERO -->
   <section class="relative overflow-hidden border-b border-line bg-paper">
@@ -258,6 +259,8 @@ const trusted = [
                   />
                   <img
                     src={feature.image}
+                    srcset={`${feature.image.replace('.webp', '-320.webp')} 320w, ${feature.image} ${feature.image.includes('feature-ahrefs') ? 516 : 420}w`}
+                    sizes="300px"
                     alt={feature.alt}
                     width="300"
                     height="400"
@@ -457,7 +460,7 @@ const trusted = [
           [
             {
               title: '24/7 support',
-              text: 'Get help with signup, login, and tool access whenever you need it — phone and email support from the BuyAhref team.',
+              text: 'Get help with signup, login, and tool access whenever you need it — support is handled through ToolsMandi after you sign up.',
             },
             {
               title: 'Account protection',
